@@ -26,9 +26,9 @@ class FillingFormTest {
     @BeforeEach
     void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
+//        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.get("http://localhost:9999");
     }
@@ -49,7 +49,7 @@ class FillingFormTest {
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
         String expected = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.className("Success_successBlock__2L3Cw")).getText();
+        String actual = driver.findElement(By.cssSelector(".Success_successBlock__2L3Cw")).getText();
         assertEquals(expected, actual);
     }
 }
