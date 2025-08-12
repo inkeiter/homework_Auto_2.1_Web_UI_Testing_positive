@@ -40,7 +40,7 @@ class FillingFormTest {
     }
 
     @Test
-    void shouldTestV1() {
+    void shouldTestPositive() {
         List<WebElement> elements = driver.findElements(By.className("input__control"));
 //        driver.findElements(By.cssSelector("input[type='text']")).sendKeys("Екатерина");
 //        driver.findElements(By.cssSelector("input[type='tel']")).sendKeys("+71234567890");
@@ -50,6 +50,19 @@ class FillingFormTest {
         driver.findElement(By.className("button")).click();
         String expected = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
         String actual = driver.findElement(By.cssSelector(".Success_successBlock__2L3Cw")).getText();
+        assertEquals(expected, actual);
+    }
+    @Test
+    void shouldTestNegative() {
+        List<WebElement> elements = driver.findElements(By.className("input__control"));
+//        driver.findElements(By.cssSelector("input[type='text']")).sendKeys("Екатерина");
+//        driver.findElements(By.cssSelector("input[type='tel']")).sendKeys("+71234567890");
+        elements.get(0).sendKeys("Ekaterina");
+        elements.get(1).sendKeys("+71234567890");
+        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.className("button")).click();
+        String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.";
+        String actual = driver.findElement(By.className("input__sub")).getText();
         assertEquals(expected, actual);
     }
 }
